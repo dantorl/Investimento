@@ -61,5 +61,18 @@ public class SimulacaoServiceTest {
         RespSimulacao respSimulacao1 = simulacaoService.criarSimulacao(simulacao.getQtdMeses(), simulacao.getVlrAplicacao(), investimento.getRentabilidade());
         Assertions.assertEquals(respSimulacao1.getResultadoSimulacao(), respSimulacao.getResultadoSimulacao());
     }
+    @Test
+    public void testarBuscarInvestimentoPorIdErro(){
+
+        Optional<Investimento> investimentoOptional2 = Optional.empty();
+
+        Mockito.when(investimentoRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        try {
+            investimentoOptional2 = simulacaoService.buscarPorId(investimento.getIdIvest());
+        }catch (Exception e){
+            Assertions.assertEquals(Optional.empty(), investimentoOptional2);
+        }
+    }
 
 }

@@ -93,4 +93,19 @@ public class InvestimentoServiceTest {
         Assertions.assertEquals(investimentoOptional, investimentoOptional2);
     }
 
+    @Test
+    public void testarBuscarInvestimentoPorIdErro(){
+
+        Optional<Investimento> investimentoOptional2 = Optional.empty();
+
+        Mockito.when(investimentoRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        try {
+            investimentoOptional2 = investimentoService.buscarPorId(investimento.getIdIvest());
+        }catch (Exception e){
+            Assertions.assertEquals(Optional.empty(), investimentoOptional2);
+        }
+
+    }
+
 }
